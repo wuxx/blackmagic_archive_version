@@ -1,0 +1,45 @@
+Readme - jc66_coreboard
+
+This platform is meant to be used with the stm32f103c8t6 minimal boards
+you find on ebay. Specifically the ones mentioned in this post:
+
+  http://www.stm32duino.com/viewtopic.php?f=28&t=117
+
+More information about how to use this platform with
+the stm32duino Arduino core:
+
+  http://www.stm32duino.com/viewtopic.php?f=37&t=122
+
+To build this version use:
+
+$ make PROBE_HOST=jc66_coreboard
+$ arm-none-eabi-gdb -ex 'target extended-remote :3333' -ex 'monitor reset init' -ex 'load'
+ blackmagic
+
+The firmware binaries end up src/
+ src/blackmagic is an elf
+ src/blackmagic.bin
+
+Connections:
+====================
+
+NC: User button to force system bootloader entry with reset
+    (No DFU Booloader on this platform)
+
+PA7: TDI
+PA4: TMS/SWDIO
+PA5: TCK/SWCLK
+PA6: TDO/TRACESWO
+
+PA2 TX Virtual UART
+PA3 RX Virtual UART
+
+NC: TRST
+NC: SRST
+
+PC13: LED IDLE LED
+PC14: "UART" LED
+
+The DFU bootloader is not implemented for this board. You must use
+a serial dongle or another programmer to load the blackmagic elf 
+or blackmagic.bin firmware onto the board.
